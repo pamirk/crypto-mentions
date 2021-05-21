@@ -91,7 +91,7 @@ const initialValues = {
 
 function Index() {
     const [tableData, setTableData] = useState(initialValues)
-    const queryInfo = useQuery('fear-and-greed-index-query', () => {
+    const {data, isSuccess, isFetching} = useQuery('fear', () => {
         return axios.get("/api/get_fear").then(res => {
             console.log(res.data.data)
             return res.data.data
@@ -100,19 +100,21 @@ function Index() {
         refetchOnWindowFocus: false,
     })
     useEffect(() => {
-        if (queryInfo.isSuccess) {
+        console.log("isSuccess", isSuccess)
+        if (isSuccess) {
+
             setTableData({
-                nowStatus: queryInfo.data[0].value_classification,
-                nowValue: queryInfo.data[0].value,
-                yesterdayStatus: queryInfo.data[1].value_classification,
-                yesterdayValue: queryInfo.data[1].value,
-                lastWeekStatus: queryInfo.data[7].value_classification,
-                lastWeekValue: queryInfo.data[7].value,
-                lastMonthStatus: queryInfo.data[30].value_classification,
-                lastMonthValue: queryInfo.data[30].value,
+                nowStatus: data[0].value_classification,
+                nowValue: data[0].value,
+                yesterdayStatus: data[1].value_classification,
+                yesterdayValue: data[1].value,
+                lastWeekStatus: data[7].value_classification,
+                lastWeekValue: data[7].value,
+                lastMonthStatus: data[30].value_classification,
+                lastMonthValue: data[30].value,
             })
         }
-    }, [queryInfo.data])
+    }, [data])
 
     return (
         <Columns>
@@ -125,8 +127,8 @@ function Index() {
             </Column>
 
             <Column>
-                {(queryInfo.isFetching)
-                    ? <Skeleton active/>
+                {(isFetching)
+                    ? "loading"
                     : <Box>
                         <Title>Historical Values</Title>
                         <div>
