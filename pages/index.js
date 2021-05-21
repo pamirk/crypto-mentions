@@ -1,14 +1,20 @@
-import React from "react";
-import {QueryClient, QueryClientProvider} from 'react-query'
-import {ReactQueryDevtools} from 'react-query/devtools'
-
+import React, {useEffect, useState} from "react";
 import 'antd/dist/antd.css';
 import styles from '../styles/Home.module.css'
-import ReferenceCharts from "../components/ReferenceCharts";
+import axios from "axios";
+
 function Home() {
+    const [tableData, setTableData] = useState(null)
+
+    useEffect(() => {
+        axios.get("https://api.alternative.me/fng/?limit=31").then(res => {
+            console.log(res.data.data)
+            setTableData(res.data.data)
+        })
+    }, [])
     return (
         <div className={styles.container}>
-            <ReferenceCharts/>
+            {tableData && tableData[0].value_classification}
             <footer className={styles.footer}>
                 Developed by PK
             </footer>
@@ -17,11 +23,7 @@ function Home() {
 }
 
 export default function Index() {
-    const queryClient = new QueryClient()
     return (
-        <QueryClientProvider client={queryClient}>
-            <Home/>
-            <ReactQueryDevtools initialIsOpen={true}/>
-        </QueryClientProvider>
+        <Home/>
     )
 }
