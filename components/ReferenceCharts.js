@@ -23,12 +23,12 @@ const Column = styled.div`
     display: flex;
     flex-basis: 0;
     flex-grow: 1;
-    flex-shrink: 1;
+    flex-shrink: 1; 
     padding: .75rem;
     @media print, screen and (min-width: 769px) {
       flex: none;
       width: 33.3333%;
-    }
+    }   
 `
 const Box = styled.div`
     background-color: #fff;
@@ -57,7 +57,7 @@ const Value = styled.div`
     margin-bottom: 5px;
     display: flex;
     justify-content: space-between;
-
+    
     &:last-child {
     border-bottom: 0;
     margin-bottom: 0;
@@ -88,51 +88,31 @@ const initialValues = {
     lastMonthStatus: '',
     lastMonthValue: '',
 }
-const url = 'https://api.alternative.me/fng/?limit=31';
 
 function Index() {
     const [tableData, setTableData] = useState(initialValues)
-    // const queryInfo = useQuery('fear-and-greed-index-query', () => {
-    //     return fetch(url).then(res => res.json()).then(res => {
-    //         return res.data
-    //     })
-    // }, {
-    //     refetchOnWindowFocus: true,
-    //     staleTime: 2 * 60 * 1000,
-    //     cacheTime: 0
-    // })
-
+    const queryInfo = useQuery('fear-and-greed-index-query', () => {
+        return axios.get("/api/getFear").then(res => {
+            console.log(res.data.data)
+            return res.data.data
+        })
+    }, {
+        refetchOnWindowFocus: false,
+    })
     useEffect(() => {
-
-        fetch(url).then(res => res.json())
-            .then(res => {
-                console.log(res.data)
-                const queryInfo = res.data
-                setTableData({
-                    nowStatus: queryInfo[0].value_classification,
-                    nowValue: queryInfo[0].value,
-                    yesterdayStatus: queryInfo[1].value_classification,
-                    yesterdayValue: queryInfo[1].value,
-                    lastWeekStatus: queryInfo[7].value_classification,
-                    lastWeekValue: queryInfo[7].value,
-                    lastMonthStatus: queryInfo[30].value_classification,
-                    lastMonthValue: queryInfo[30].value,
-                })
+        if (queryInfo.isSuccess) {
+            setTableData({
+                nowStatus: queryInfo.data[0].value_classification,
+                nowValue: queryInfo.data[0].value,
+                yesterdayStatus: queryInfo.data[1].value_classification,
+                yesterdayValue: queryInfo.data[1].value,
+                lastWeekStatus: queryInfo.data[7].value_classification,
+                lastWeekValue: queryInfo.data[7].value,
+                lastMonthStatus: queryInfo.data[30].value_classification,
+                lastMonthValue: queryInfo.data[30].value,
             })
-    }, [])
-
-    /*   useEffect(() => {
-           setTableData({
-                   nowStatus: queryInfo[0].value_classification,
-                   nowValue: queryInfo[0].value,
-                   yesterdayStatus: queryInfo[1].value_classification,
-                   yesterdayValue: queryInfo[1].value,
-                   lastWeekStatus: queryInfo[7].value_classification,
-                   lastWeekValue: queryInfo[7].value,
-                   lastMonthStatus: queryInfo[30].value_classification,
-                   lastMonthValue: queryInfo[30].value,
-               })
-       }, [queryInfo])*/
+        }
+    }, [queryInfo.data])
 
     return (
         <Columns>
@@ -145,7 +125,7 @@ function Index() {
             </Column>
 
             <Column>
-                {(false)
+                {(queryInfo.isFetching)
                     ? <Skeleton active/>
                     : <Box>
                         <Title>Historical Values</Title>
