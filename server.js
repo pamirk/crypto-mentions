@@ -18,6 +18,12 @@ app.prepare()
     .then(() => {
         const server = express();
         server.use(express.static(__dirname + '/public'));
+
+        server.get('/api/get_fear/', async (req, res) => {
+            const _res = await fetch('https://api.alternative.me/fng/?limit=31').then(res => res.json())
+            return res.status(200).json(_res)
+        });
+
         server.get("*", (req, res) => {
             if (
                 req.url === "/"

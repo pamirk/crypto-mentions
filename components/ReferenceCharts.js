@@ -92,7 +92,7 @@ const initialValues = {
 function Index() {
     const [tableData, setTableData] = useState(initialValues)
     const queryInfo = useQuery('fear-and-greed-index-query', () => {
-        return axios.get("/api/getFear").then(res => {
+        return axios.get("/api/get_fear").then(res => {
             console.log(res.data.data)
             return res.data.data
         })
