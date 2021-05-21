@@ -93,7 +93,9 @@ const url = 'https://api.alternative.me/fng/?limit=31';
 function Index() {
     const [tableData, setTableData] = useState(initialValues)
     const queryInfo = useQuery('fear-and-greed-index-query', () => {
-        return fetch("/api/getFear").then(res => res.json()).then(res => res.data.data)
+        return fetch(url).then(res => res.json()).then(res => {
+            return res.data
+        })
     }, {
         refetchOnWindowFocus: true,
         staleTime: 2 * 60 * 1000,
