@@ -1,5 +1,7 @@
 import React from "react";
 import {QueryClient, QueryClientProvider} from 'react-query'
+import {ReactQueryDevtools} from 'react-query/devtools'
+
 import 'antd/dist/antd.css';
 import styles from '../styles/Home.module.css'
 import ReferenceCharts from "../components/ReferenceCharts";
@@ -19,6 +21,7 @@ export default function Index() {
     return (
         <QueryClientProvider client={queryClient}>
             <Home/>
+            <ReactQueryDevtools initialIsOpen={true}/>
         </QueryClientProvider>
     )
 }
