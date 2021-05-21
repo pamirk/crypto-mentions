@@ -92,7 +92,7 @@ const initialValues = {
 function Index() {
     const [tableData, setTableData] = useState(initialValues)
     const {data, isSuccess, isFetching} = useQuery('fear', () => {
-        return axios.get("/api/get_fear").then(res => {
+        return axios.get("https://api.alternative.me/fng/?limit=31").then(res => {
             console.log(res.data.data)
             return res.data.data
         })
