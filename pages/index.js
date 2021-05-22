@@ -5,18 +5,13 @@ import {QueryClient, QueryClientProvider} from "react-query";
 import {Divider} from "antd";
 import ReferenceCharts from "../components/ReferenceCharts";
 import CoinMarketCap from "../components/CoinmarketCap";
+import RedditMentions from "../components/RedditMentions";
 
 function Home() {
-    /*const {mentionsData, isSuccess, isFetching} = useQuery('fear', () => {
-        return axios.get("/api/get_mentions").then(res => res.data)
-    }, {
-        refetchOnWindowFocus: true,
-        staleTime: 2 * 60 * 1000,
-    })*/
     return (
         <div className={styles.container}>
             <main className={styles.main}>
-
+                <RedditMentions />
                 <Divider/>
                 <CoinMarketCap/>
             </main>

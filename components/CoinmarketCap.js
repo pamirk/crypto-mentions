@@ -22,10 +22,7 @@ function CoinMarketCap() {
     const [lastUpdated, setLastUpdated] = useState(null)
     const [nameSearchHook] = useColumnSearch()
     const {data: coinData, isSuccess, isFetching, isLoading} = useQuery('coinmarketcap', () => {
-        return axios.get("/api/get_coinmarket").then(res => {
-            console.log(res.data)
-            return res.data
-        })
+        return axios.get("/api/get_coinmarket").then(res => res.data)
     }, {
         refetchOnWindowFocus: true,
         staleTime: 10 * 1000,
