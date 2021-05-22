@@ -6,14 +6,14 @@ function Home() {
     const [tableData, setTableData] = useState(null)
 
     useEffect(() => {
-        fetch("https://official-joke-api.appspot.com/random_joke").then(res => res.json()).then(res => {
+        fetch("/api/hello").then(res => res.json()).then(res => {
             console.log(res)
             setTableData(res)
         })
     }, [])
     return (
         <div className={styles.container}>
-            {tableData && tableData.setup}
+            {tableData && tableData.name}
             <footer className={styles.footer}>
                 Developed by PK
             </footer>
