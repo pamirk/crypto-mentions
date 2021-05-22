@@ -51,7 +51,8 @@ function Index({name, symbol, imgUrl, webLink = null}) {
             <CoinLogo src={imgUrl}/>
             <CenterVertically>
                 <a href={webLink ? `https://coinmarketcap.com/currencies/${webLink}/`
-                    : `https://coinmarketcap.com/currencies/${name.replaceAll(' ', '-').toLowerCase()}/`} target='_blank'>
+                    : `https://coinmarketcap.com/currencies/${name.replaceAll(' ', '-').toLowerCase()}/`}
+                        target='_blank' rel="noreferrer">
                     <Name>{name}</Name></a>
                 <SymbolContainter>
                     <SymbolText> {symbol}</SymbolText>

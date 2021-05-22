@@ -11,6 +11,7 @@
     "@ant-design/icons": "^4.6.2",
     "antd": "^4.15.6",
     "axios": "^0.21.1",
+    "babel-preset-next": "^1.4.0",
     "express": "^4.17.1",
     "google-spreadsheet": "^3.1.15",
     "lru-cache": "^6.0.0",
