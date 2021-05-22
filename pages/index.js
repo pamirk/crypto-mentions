@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import React from "react";
-import 'antd/dist/antd.css';
 import {QueryClient, QueryClientProvider} from "react-query";
 import {Divider} from "antd";
 import ReferenceCharts from "../components/ReferenceCharts";
@@ -20,7 +19,6 @@ function Home() {
 
                 <Divider/>
                 <CoinMarketCap/>
-
             </main>
             <ReferenceCharts/>
             <footer className={styles.footer}>
