@@ -6,14 +6,14 @@ function Home() {
     const [tableData, setTableData] = useState(null)
 
     useEffect(() => {
-        fetch("https://api.alternative.me/fng/?limit=31").then(res => res.json()).then(res => {
-            console.log(res.data)
-            setTableData(res.data)
+        fetch("https://official-joke-api.appspot.com/random_joke").then(res => res.json()).then(res => {
+            console.log(res)
+            setTableData(res)
         })
     }, [])
     return (
         <div className={styles.container}>
-            {tableData && tableData[0].value_classification}
+            {tableData && tableData.setup}
             <footer className={styles.footer}>
                 Developed by PK
             </footer>

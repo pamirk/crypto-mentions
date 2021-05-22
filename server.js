@@ -20,7 +20,7 @@ app.prepare()
         server.use(express.static(__dirname + '/public'));
 
         server.get('/api/get_fear/', async (req, res) => {
-            const _res = await fetch('https://api.alternative.me/fng/?limit=31').then(res => res.json())
+            const _res = await fetch('https://official-joke-api.appspot.com/random_joke').then(res => res.json())
             return res.status(200).json(_res)
         });
 
