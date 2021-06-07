@@ -2,12 +2,13 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import {QueryClient, QueryClientProvider} from "react-query";
 import React from "react";
+import GithubTracking from "../components/GithubTracking";
 
 function Home() {
     return (
         <div className={styles.container}>
             <main className={styles.main}>
-                gi
+                <GithubTracking />
             </main>
                 <footer className={styles.footer}>Developed by PK</footer>
         </div>
