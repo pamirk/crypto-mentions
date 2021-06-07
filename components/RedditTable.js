@@ -41,8 +41,10 @@ function Index({loading, data}) {
         }
     ];
     return (
-        <Table loading={loading} style={{width: '100vw'}}
-               columns={columns} dataSource={data}/>
+        <Table loading={loading}
+               style={{width: '100vw'}}
+               columns={columns}
+               dataSource={data}/>
     );
 }
 

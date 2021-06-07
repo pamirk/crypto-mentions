@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function Index({value}) {
+function LastUpdatedTime({value}) {
     return <CenterHorizontally>
         <CenterVertically>
             <Text>Last Updated:</Text>
@@ -10,7 +10,7 @@ function Index({value}) {
     </CenterHorizontally>;
 }
 
-export default Index;
+export default LastUpdatedTime;
 
 const Text = styled.p`
     line-height: 16px;

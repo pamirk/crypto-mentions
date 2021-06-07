@@ -3,6 +3,7 @@ import {Button, Input, Space} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 
 const nameSearch = (value, record, dataIndex) => record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+    || record.symbol && record.symbol.toString().toLowerCase().includes(value.toLowerCase())
 function useColumnSearch() {
     const [searchText, setSearchText] = React.useState('')
     const [searchedColumn, setSearchedColumn] = React.useState('')

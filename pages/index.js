@@ -6,6 +6,7 @@ import {Divider} from "antd";
 import ReferenceCharts from "../components/ReferenceCharts";
 import CoinMarketCap from "../components/CoinmarketCap";
 import RedditMentions from "../components/RedditMentions";
+import GithubTracking from "../components/GithubTracking";
 
 function Home() {
     return (
@@ -13,6 +14,8 @@ function Home() {
             <main className={styles.main}>
                 <RedditMentions />
                 <Divider/>
+                 <GithubTracking />
+                <Divider />
                 <CoinMarketCap/>
             </main>
             <ReferenceCharts/>

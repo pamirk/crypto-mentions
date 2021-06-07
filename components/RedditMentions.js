@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import IntroDiv from "./IntroDiv";
 import {Button, Dropdown, Menu} from "antd";
 import DownOutlined from "@ant-design/icons/lib/icons/DownOutlined";
-import LastupdatedTime from "./LastupdatedTime";
+import LastUpdatedTime from "./LastUpdatedTime";
 import RedditTable from "./RedditTable";
 import coins from "../coins";
 import moment from "moment";
@@ -134,7 +134,7 @@ function RedditMentions() {
             <IntroDiv text="Reddit Crypto Mentions"/>
                 {(isLoading)
                     ? <div>...</div> :
-                    <LastupdatedTime value={lastUpdated}/>}
+                    <LastUpdatedTime value={lastUpdated}/>}
                 <div style={{width: '100%', textAlign: 'end', padding: '10px'}}>
                     <Dropdown overlay={menu} trigger={['click']}>
                         <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>

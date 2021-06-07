@@ -173,7 +173,7 @@ function CoinMarketCap() {
             <Table loading={isLoading}
                    scroll={{x: 'calc(700px + 60%)'}}
                    size={'small'}
-                   style={{width: '100vw', padding: "2rem 1rem"}}
+                   style={{width: '100vw'}}
                    columns={columns} dataSource={tableData}/>
         </div>
     );
