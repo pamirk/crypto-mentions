@@ -24,7 +24,7 @@ function CommitTable({loading, data}) {
             key: 'name',
             ...nameSearchHook('name', null),
             render: (text, record) => (
-                <GitSymbolText name={text} symbol={record.symbol} imgUrl={record.imgUrl}/>
+                <GitSymbolText github={record.githubLink} name={text} symbol={record.symbol} imgUrl={record.imgUrl}/>
             ),
         },
         {

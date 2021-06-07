@@ -44,15 +44,16 @@ const CoinLogo = styled.img`
 `
 
 
-function GitSymbolText({name, symbol, imgUrl}) {
+function GitSymbolText({name, github, symbol, imgUrl}) {
     return (
         <CenterHorizontally>
 
             <CoinLogo src={imgUrl}/>
             <CenterVertically>
-                <a href={`https://github.com/${name}`} target='_blank' rel="noreferrer">
+                {github ? <a href={`https://github.com/${github}`} target='_blank' rel="noreferrer">
                     <Name>{name}</Name>
-                </a>
+                </a> : <Name>{name}</Name>}
+
                 <SymbolContainter>
                     <SymbolText> {symbol}</SymbolText>
                 </SymbolContainter>

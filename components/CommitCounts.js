@@ -44,6 +44,7 @@ function CommitCounts() {
                 key: i,
                 // name: mentionsData.headerValues[i + 1],
                 name: coin ? coin.name : value,
+                githubLink: coin ? coin.github : null,
                 commits: commits,
                 change: difference(commits, secondLastRow[value]),
                 contributors: 1,
