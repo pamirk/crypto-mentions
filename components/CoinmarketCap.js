@@ -6,7 +6,7 @@ import {useQuery} from "react-query";
 import axios from "axios";
 import IntroDiv from "./IntroDiv";
 import moment from "moment";
-import LastupdatedTime from "./LastupdatedTime";
+import LastUpdatedTime from "./LastUpdatedTime";
 import styles from "../styles/Home.module.css";
 import Last7daysComponent from "./Last7daysComponent";
 import useColumnSearch from "./ColumnSearch";
@@ -166,7 +166,7 @@ function CoinMarketCap() {
                 <IntroDiv text="Today's Cryptocurrency Prices by Market Cap"/>
                 {(isLoading)
                     ? <div>...</div> :
-                    <LastupdatedTime value={lastUpdated}/>}
+                    <LastUpdatedTime value={lastUpdated}/>}
 
 
             </div>

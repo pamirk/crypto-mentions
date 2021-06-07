@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import IntroDiv from "./IntroDiv";
 import {Button, Dropdown, Menu} from "antd";
 import DownOutlined from "@ant-design/icons/lib/icons/DownOutlined";
-import LastUpdatedTime from "./LastupdatedTime";
+import LastUpdatedTime from "./LastUpdatedTime";
 import coins from "../coins";
 import moment from "moment";
 import {useQuery} from "react-query";
