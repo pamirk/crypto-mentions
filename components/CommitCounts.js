@@ -26,7 +26,7 @@ function CommitCounts() {
     const [coinNames, setCoinNames] = useState([])
     const [lastUpdated, setLastUpdated] = useState(null)
 
-    const {data: mentionsData, isSuccess, isFetching, isLoading} = useQuery('get_mentions', () => {
+    const {data: commitsData, isSuccess, isFetching, isLoading} = useQuery('get_commits', () => {
         return axios.get("/api/get_github_tracker").then(res => res.data)
     }, {
         refetchOnWindowFocus: false,
@@ -42,7 +42,7 @@ function CommitCounts() {
             commits = lastRow[value]
             data.push({
                 key: i,
-                // name: mentionsData.headerValues[i + 1],
+                // name: commitsData.headerValues[i + 1],
                 name: coin ? coin.name : value,
                 githubLink: coin ? coin.github : null,
                 commits: commits,
@@ -50,7 +50,7 @@ function CommitCounts() {
                 contributors: 1,
                 imgUrl: coin && coin.thumb,
                 symbol: coin && coin.symbol,
-                graphData: mentionsData.rows.map(v => v.values[value])
+                graphData: commitsData.rows.map(v => v.values[value])
             })
         })
 
@@ -61,18 +61,18 @@ function CommitCounts() {
         if (!isLoading) {
             initialDataSetup()
         }
-    }, [mentionsData])
+    }, [commitsData])
 
     useEffect(() => {
         if (!isLoading) {
-            setLastUpdated(moment(mentionsData.rows[mentionsData.rows.length - 1].time).fromNow())
+            setLastUpdated(moment(commitsData.rows[commitsData.rows.length - 1].time).fromNow())
         }
-    }, [mentionsData])
+    }, [commitsData])
 
     function initialDataSetup() {
-        setCoinNames(mentionsData.headerValues)
-        setTableData(formatDataForTable(coinNames, mentionsData.rows[mentionsData.rows.length - 1].values,
-            mentionsData.rows[mentionsData.rows.length - 2].values))
+        setCoinNames(commitsData.headerValues)
+        setTableData(formatDataForTable(coinNames, commitsData.rows[commitsData.rows.length - 1].values,
+            commitsData.rows[commitsData.rows.length - 2].values))
     }
 
     const onClick = ({key}) => {

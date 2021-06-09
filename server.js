@@ -22,7 +22,7 @@ app.prepare()
         server.get("*", (req, res) => {
             if (
                 req.url === "/"
-                // || req.url === "/gethour"
+                || req.url === "/github"
                 // || req.url === "/hello"
                 // || req.url === "/test"
             ) {

@@ -16,7 +16,6 @@ function CommitTable({loading, data}) {
     const [nameSearchHook] = useColumnSearch()
     const [mentionSearchHook] = useColumnSearch()
 
-
     const columns = [
         {
             title: 'Coin',

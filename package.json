@@ -16,6 +16,7 @@
     "babel-preset-next": "^1.4.0",
     "express": "^4.17.1",
     "google-spreadsheet": "^3.1.15",
+    "lodash": "^4.17.21",
     "lru-cache": "^6.0.0",
     "moment": "^2.29.1",
     "next": "10.2.2",

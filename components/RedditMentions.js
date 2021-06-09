@@ -8,6 +8,7 @@ import coins from "../coins";
 import moment from "moment";
 import {useQuery} from "react-query";
 import axios from "axios";
+import _ from 'lodash';
 
 function difference(a, b) {
     const diff = 100 * (a - b) / ((a + b) / 2);
@@ -27,6 +28,31 @@ function RedditMentions() {
         staleTime: 2 * 60 * 1000,
     })
 
+    const List = React.useMemo(() => {
+            console.time("reddit")
+            let obj = {}
+            let key = ''
+            if (!isLoading) {
+                mentionsData.rows.map(i => {
+                    key = i.time.split('T')[0]
+                    if (obj.hasOwnProperty(key)) {
+                        obj[key] = _.unzipWith([_.map(obj[key], _.ary(parseInt, 1)),
+                                _.map(i.values, _.ary(parseInt, 1))],
+                            _.add)
+                    } else {
+                        obj[key] = i.values
+                    }
+
+                })
+                console.timeEnd("reddit")
+
+                return Object.keys(obj).map((value, index) => obj[value])
+            }
+
+        }, [mentionsData]
+    )
+
+
     const formatDataForTable = (symbolNames, lastRow, secondLastRow) => {
         let data = []
         lastRow.map((v, i) => {
@@ -36,7 +62,8 @@ function RedditMentions() {
                 mentions: v,
                 imgUrl: coins[i].thumb,
                 symbol: coins[i].symbol,
-                change: difference(v, secondLastRow[i])
+                change: difference(v, secondLastRow[i]),
+                graphData: List.map(singleArray => singleArray[i])
             })
         })
 
@@ -132,17 +159,17 @@ function RedditMentions() {
     return (
         <>
             <IntroDiv text="Reddit Crypto Mentions"/>
-                {(isLoading)
-                    ? <div>...</div> :
-                    <LastUpdatedTime value={lastUpdated}/>}
-                <div style={{width: '100%', textAlign: 'end', padding: '10px'}}>
-                    <Dropdown overlay={menu} trigger={['click']}>
-                        <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                            {dropDownValue} <DownOutlined/>
-                        </Button>
-                    </Dropdown>
-                </div>
-                <RedditTable loading={isLoading} data={tableData}/>
+            {(isLoading)
+                ? <div>...</div> :
+                <LastUpdatedTime value={lastUpdated}/>}
+            <div style={{width: '100%', textAlign: 'end', padding: '10px'}}>
+                <Dropdown overlay={menu} trigger={['click']}>
+                    <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        {dropDownValue} <DownOutlined/>
+                    </Button>
+                </Dropdown>
+            </div>
+            <RedditTable loading={isLoading} data={tableData}/>
         </>
     );
 }

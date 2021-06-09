@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {TinyLine} from '@ant-design/charts';
 
 const GitTinyLine = ({data}) => {
