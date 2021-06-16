@@ -1,4 +1,4 @@
-import { backgroundColor } from "context/theme"
+import { backgroundColor } from "../context/theme"
 import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`

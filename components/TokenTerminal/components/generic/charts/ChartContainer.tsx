@@ -243,7 +243,7 @@ const ChartContainer = (props: Props) => {
                     <RightAlignedButtons>
                         <WhiteButton
                             name="Expand"
-                            icon={null}
+                            icon={undefined}
                             tooltipId="chart-expand"
                             onClick={() => setShowModal(true)}
                         />
@@ -256,7 +256,7 @@ const ChartContainer = (props: Props) => {
                         <WhiteButton
                             name="Download"
                             tooltipId={"chart-download-allowed"}
-                            icon={null}
+                            icon={undefined}
                             onClick={handleDownload}
                         />
                     </RightAlignedButtons>

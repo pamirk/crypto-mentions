@@ -1,4 +1,3 @@
-import { timeSince } from "helpers/date"
 import { isMobile } from "../../../helpers/generic"
 import { sortBy } from "lodash"
 import { ProjectType } from "../../../types/ApiTypes"
