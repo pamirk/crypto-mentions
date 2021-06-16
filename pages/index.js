@@ -7,22 +7,32 @@ import ReferenceCharts from "../components/ReferenceCharts";
 import CoinMarketCap from "../components/CoinmarketCap";
 import RedditTracking from "../components/RedditTracking";
 import GithubTracking from "../components/GithubTracking";
+import dynamic from "next/dynamic";
+
+const PS = dynamic(() => import('./../components/TokenTerminal/metrics/ps/PS'), {
+    ssr: false
+})
 
 function Home() {
     return (
-        <div className={styles.container}>
-            <main className={styles.main}>
-                <RedditTracking />
-                <Divider />
-                <GithubTracking />
-                <Divider />
-                <CoinMarketCap/>
-            </main>
-            <ReferenceCharts/>
-            <footer className={styles.footer}>
-                Developed by PK
-            </footer>
-        </div>
+        <>
+            <PS/>
+            <Divider/>
+            <div className={styles.container}>
+                <main className={styles.main}>
+
+                    <RedditTracking/>
+                    <Divider/>
+                    <GithubTracking/>
+                    <Divider/>
+                    <CoinMarketCap/>
+                </main>
+                <ReferenceCharts/>
+                <footer className={styles.footer}>
+                    Developed by PK
+                </footer>
+            </div>
+        </>
     )
 }
 
