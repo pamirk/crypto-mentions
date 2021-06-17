@@ -35,7 +35,8 @@ import {
 } from "../../../context/theme"
 import {useAuth} from "../../../context/AuthContext"
 import {getLastUpdated} from "./ChartUtils"
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
+import {DownOutlined, UpOutlined} from "@ant-design/icons/lib";
 
 // import {useParams} from "react-router-dom"
 
@@ -146,14 +147,11 @@ const ChartContainer = (props: Props) => {
                     <Title>
                         <Tooltip id={tooltipId}>{title}</Tooltip>
                     </Title>
-
-                    {window.location.pathname.includes("/terminal") && (
-                        <Hide onClick={() => setIsOpen(!isOpen)}>
-                            {isOpen ? "Hide chart" : "Show chart"}
-                            <Img src={isOpen ? "../../../utils/arrowUp.svg" : "utils/arrowDown.svg"}
-                                 alt="Toggle visibility"/>
-                        </Hide>
-                    )}
+                    {/*window.location.pathname.includes("/terminal")*/}
+                    <Hide onClick={() => setIsOpen(!isOpen)}>
+                        {isOpen ? "Hide chart: " : "Show chart: "} {' '}
+                        {isOpen ? <UpOutlined /> : <DownOutlined />}
+                    </Hide>
                 </TitleWrapper>
             )}
 
@@ -247,7 +245,7 @@ const ChartContainer = (props: Props) => {
                             tooltipId="chart-expand"
                             onClick={() => setShowModal(true)}
                         />
-                    {/*    <WhiteButton
+                        {/*    <WhiteButton
                             name={copyText}
                             icon={null}
                             tooltipId="chart-copy-link"
