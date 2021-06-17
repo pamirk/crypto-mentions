@@ -20,7 +20,11 @@ export const defaultApiToken = "c0e5035a-64f6-4d2c-b5f6-ac1d1cb3da2f"
 export const setApiToken = (token: string | undefined) => (apiToken = token)
 
 let apiToken: string | undefined = undefined
-const dataHash = 1623060669
+let d = new Date();
+// let seconds = Math.floor(d.getTime() / 1000);
+//1623060669 1623773241
+//1623912926
+const dataHash = 1623773241
 const postFix = `data_hash=${dataHash}`
 const prefix = "https://api.tokenterminal.com"
 

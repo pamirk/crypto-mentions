@@ -51,8 +51,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-bottom: 120px;
-  padding: 5rem 0 0;
+  padding: 1rem 0 0;
 
 
 `

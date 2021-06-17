@@ -40,8 +40,9 @@ const BarChartGraph = (props: {
                 margin={{
                     ...chartMargin,
                     bottom: isMobile ? 40 : 70,
-                    left: isMobile ? -20 : 35,
+                    left: isMobile ? 0 : 35,
                 }}
+
                 onMouseLeave={() => setActiveIndex(-1)}
             >
                 <CartesianGrid
@@ -60,7 +61,7 @@ const BarChartGraph = (props: {
                 interval={0}
                 textAnchor="end"
             />
-            <YAxis
+            <YAxis allowDecimals={false}
                 label={
                     !isMobile
                         ? {

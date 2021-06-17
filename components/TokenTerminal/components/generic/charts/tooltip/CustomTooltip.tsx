@@ -37,7 +37,7 @@ const CustomTooltip = ({
     }
   })
 
-  if (isMobile) return null
+  // if (isMobile) return null
 
   const sortedPayload =
     metric === "ps"
