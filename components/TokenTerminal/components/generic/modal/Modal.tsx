@@ -8,65 +8,65 @@ import {isMobile} from "../../../helpers/generic"
 // import X from "../../../utils/x.svg"
 
 type Props = {
-  style?: any
-  show: boolean
-  onClose: () => void
-  onSubmit?: () => void
-  title?: string
-  children: React.ReactNode
-  errorMsg?: string
-  submitButton?: React.ReactNode
-  closeText?: string
-  submitText?: string
+    style?: any
+    show: boolean
+    onClose: () => void
+    onSubmit?: () => void
+    title?: string
+    children: React.ReactNode
+    errorMsg?: string
+    submitButton?: React.ReactNode
+    closeText?: string
+    submitText?: string
 }
 const Modal = ({
-  errorMsg,
-  style,
-  onClose,
-  closeText,
-  onSubmit,
-  submitText,
-  show,
-  children,
-  title,
-  submitButton,
-}: Props) => {
-  const ref = useRef(null)
+                   errorMsg,
+                   style,
+                   onClose,
+                   closeText,
+                   onSubmit,
+                   submitText,
+                   show,
+                   children,
+                   title,
+                   submitButton,
+               }: Props) => {
+    const ref = useRef(null)
 
-  const handleClickOutside = () => onClose()
+    const handleClickOutside = () => onClose()
 
-  useOnClickOutside(ref, handleClickOutside)
+    useOnClickOutside(ref, handleClickOutside)
 
-  if (!show) return null
+    if (!show) return null
 
-  const showCloseButton = !!onClose && (!title || isMobile)
+    const showCloseButton = !!onClose && (!title || isMobile)
 
-  return (
-    <Container>
-      <Wrapper ref={ref}>
-        {title && (
-          <TitleWrapper>
-            {title}
-            {!showCloseButton && (
-              <CloseImg src={'../../../utils/x.svg'} alt="Close" onClick={onClose} />
-            )}
-          </TitleWrapper>
-        )}
-        <Contents style={style}>{children}</Contents>
-        <Buttons>
-          {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
-          {submitButton}
-          {onSubmit && <ModalButton onClick={onSubmit} name={submitText} />}
-          {showCloseButton && (
-            <ModalButton onClick={onClose} name={closeText} />
-          )}
-        </Buttons>
-      </Wrapper>
-    </Container>
-  )
+    return (
+        <Container>
+            <Wrapper ref={ref}>
+                {title && (
+                    <TitleWrapper>
+                        {title}
+                        {!showCloseButton && (
+                            <CloseImg src={'../../../utils/x.svg'} alt="Close" onClick={onClose}/>
+                        )}
+                    </TitleWrapper>
+                )}
+                <Contents style={style}>{children}</Contents>
+                <Buttons>
+                    {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
+                    {submitButton}
+                    {onSubmit && <ModalButton onClick={onSubmit} name={submitText}/>}
+                    {showCloseButton && (
+                        <ModalButton onClick={onClose} name={closeText}/>
+                    )}
+                </Buttons>
+            </Wrapper>
+        </Container>
+    )
 }
 
-Modal.defaultProps = { submitText: "Submit", closeText: "Close" }
+Modal.defaultProps = {submitText: "Submit", closeText: "Close"}
 
 export default Modal
 
@@ -108,7 +108,7 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: ${isMobile ? "#fff" : "rgba(0, 0, 0, 0.3)"} ;
   z-index: 999;
 `
 

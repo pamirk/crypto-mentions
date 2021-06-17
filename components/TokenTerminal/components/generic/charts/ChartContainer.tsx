@@ -150,7 +150,7 @@ const ChartContainer = (props: Props) => {
                     {/*window.location.pathname.includes("/terminal")*/}
                     <Hide onClick={() => setIsOpen(!isOpen)}>
                         {isOpen ? "Hide chart: " : "Show chart: "} {' '}
-                        {isOpen ? <UpOutlined /> : <DownOutlined />}
+                        {isOpen ? <UpOutlined/> : <DownOutlined/>}
                     </Hide>
                 </TitleWrapper>
             )}
@@ -208,7 +208,7 @@ const ChartContainer = (props: Props) => {
                     <ChartInfo>
                         {infoString !== "" && <InfoString>{infoString}</InfoString>}
                         {/* LAST UPDATED FEATURE DISABLED FOR NOW */}
-                        {true && chartData.length > 0 && (
+                        {chartData.length > 0 && (
                             <InfoString>{getLastUpdated(chartData)}</InfoString>
                         )}
                         {onSelectChartType && (
@@ -226,13 +226,13 @@ const ChartContainer = (props: Props) => {
                             {children}
                             {showModal && (
                                 <ExpandChartModal
-
                                     project={project}
                                     infoString={infoString}
                                     closeModal={() => setShowModal(false)}
                                 >
                                     {children}
                                 </ExpandChartModal>
+
                             )}
                         </>
                     ) : (
@@ -260,9 +260,9 @@ const ChartContainer = (props: Props) => {
                     </RightAlignedButtons>
                 </ChartContents>
             )}
-            {isUpgradeModalVisible && (
+            {/* {isUpgradeModalVisible && (
                 <UpgradeModal onClose={() => setIsUpgradeModalVisible(false)}/>
-            )}
+            )}*/}
         </Container>
     )
 }

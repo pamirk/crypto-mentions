@@ -290,7 +290,7 @@ export const ExpandChartModal = (props: {
     const {children, project, infoString, closeModal} = props
 
     return (
-        <Modal show onClose={closeModal} style={{backgroundColor: "#fff"}}>
+        <Modal show onClose={closeModal}>
             {project && (
                 <ModalProject>
                     <ModalImg
