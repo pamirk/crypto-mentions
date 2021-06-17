@@ -40,7 +40,7 @@ const BarChartGraph = (props: {
                 margin={{
                     ...chartMargin,
                     bottom: isMobile ? 40 : 70,
-                    left: isMobile ? 0 : 35,
+                    left: isMobile ? -15 : 35,
                 }}
 
                 onMouseLeave={() => setActiveIndex(-1)}

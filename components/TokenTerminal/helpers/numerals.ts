@@ -78,7 +78,7 @@ export const getLabelForX = (value?: number | null) => {
 
 export const getLabelForChart = (value: number | null, label?: string) => {
   if (value === undefined) return "-"
-  if (label === "ps") return numeral(value).format("0.00") + "x"
+  if (label === "ps") return numeral(value).format("0a") + "x"
   return "$" + numeral(value).format("0.0a")
 }
 
