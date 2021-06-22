@@ -25,6 +25,7 @@ const PS = (props: { projects: ProjectsType }) => {
         fetchPSMetrics("daily").then(
             (data) => !isCanceled && updateMetrics("daily", data)
         )
+        // updateMetrics("daily", MyData)
         return () => {
             isCanceled = true
         }

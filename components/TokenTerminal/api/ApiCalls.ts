@@ -22,9 +22,9 @@ export const setApiToken = (token: string | undefined) => (apiToken = token)
 let apiToken: string | undefined = undefined
 let d = new Date();
 // let seconds = Math.floor(d.getTime() / 1000);
-//1623060669 1623773241
-//1623912926
-const dataHash = 1623773241
+//1623060669 1623773241 1623938133
+//1623912926 1624037083 1624267053
+const dataHash = 1624267053
 const postFix = `data_hash=${dataHash}`
 const prefix = "https://api.tokenterminal.com"
 

@@ -1,1 +1,3 @@
-export const isMobile = document.body.clientWidth < 720
+export const isMobile = true
+
+// export const isMobile = document && document.body.clientWidth < 720
