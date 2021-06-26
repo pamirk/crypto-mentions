@@ -25,8 +25,8 @@ function Home() {
 
                     <RedditTracking/>
                     <Divider/>
-                    {/*  <GithubTracking/>
-                    <Divider/>*/}
+                    <GithubTracking/>
+                    <Divider/>
                     <CoinMarketCap/>
                 </main>
                 <ReferenceCharts/>
