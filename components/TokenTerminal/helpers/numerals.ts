@@ -99,7 +99,16 @@ export const getLabelForTooltip = (value: number | null, label?: string) => {
     "≈ $" + rounded,
   ]
 }
+export const getChartLabel = (value: number | null, label?: string) => {
+  if (value === undefined || value === null) return ["-"]
+  if (label === "ps") return [numeral(value).format("0a") + "x"]
 
+  const rounded = isNaN(parseFloat(numeral(value).format("0.0a")))
+    ? 0
+    : numeral(value).format("0.0a")
+
+  return ["$" + rounded]
+}
 export type ColorStyle = { color: string }
 
 export const getColor = (percentage?: number | null): ColorStyle => {

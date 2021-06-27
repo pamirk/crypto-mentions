@@ -7,6 +7,7 @@ import {debounce} from "lodash"
 import {useTheme} from "../../../context/ThemeContext"
 import {isMobile} from "../../../helpers/generic"
 import {chartMargin} from "./ChartUtils"
+import CustomLabel from "./label/CustomLabel";
 
 
 const BarChartGraph = (props: {
@@ -34,7 +35,7 @@ const BarChartGraph = (props: {
     }
 
     return (
-        <ResponsiveContainer height={isMobile ? 250 : 500}>
+        <ResponsiveContainer  height={isMobile ? 250 : 500}>
             <BarChart
                 data={chartData}
                 margin={{
@@ -58,49 +59,50 @@ const BarChartGraph = (props: {
                     dataKey={xAxisDataKey}
                     allowDataOverflow={true}
                     angle={isMobile ? -90 : -45}
-                interval={0}
-                textAnchor="end"
-            />
-            <YAxis allowDecimals={false}
-                label={
-                    !isMobile
-                        ? {
-                            angle: -90,
-                            value: label,
-                            position: "insideLeft",
-                            offset: -30,
-                            style: {
-                                fontSize: isMobile ? 9 : 12,
-                                fill: labelColor,
-                                textAnchor: "middle",
-                            },
-                        }
-                        : undefined
-                }
-                tick={{
-                    fontSize: isMobile ? 9 : 12,
-                    fill: mode === "light" ? "unset" : "#FFF",
-                }}
-                axisLine={false}
-                tickFormatter={(tick) => getLabelForChart(tick, barDataKey)}
-            />
-            <Tooltip cursor={false} content={<CustomTooltip/>}/>
-            <Bar
-                dataKey={barDataKey}
-                fill="#6FECCE"
-                onMouseEnter={handleMouseEnter}
-            >
-                {chartData.map((entry, index) => (
-                    <Cell
-                        fill={index === activeIndex ? "#b8d9ce" : "#6FECCE"}
-                        key={`cell-${index}`}
-                    />
-                ))}
-            </Bar>
-            {/*{watermark}*/}
-        </BarChart>
-</ResponsiveContainer>
-)
+                    interval={0}
+                    textAnchor="end"
+                />
+                <YAxis allowDecimals={false}
+                       label={
+                           !isMobile
+                               ? {
+                                   angle: -90,
+                                   value: label,
+                                   position: "insideLeft",
+                                   offset: -30,
+                                   style: {
+                                       fontSize: isMobile ? 9 : 12,
+                                       fill: labelColor,
+                                       textAnchor: "middle",
+                                   },
+                               }
+                               : undefined
+                       }
+                       tick={{
+                           fontSize: isMobile ? 9 : 12,
+                           fill: mode === "light" ? "unset" : "#FFF",
+                       }}
+                       axisLine={false}
+                       tickFormatter={(tick) => getLabelForChart(tick, barDataKey)}
+                />
+                <Tooltip cursor={isMobile} content={<CustomTooltip/>}/>
+                <Bar
+                    dataKey={barDataKey}
+                    fill="#6FECCE"
+                    onMouseEnter={handleMouseEnter}
+                    label={!isMobile ? (props) =>  <CustomLabel datakey={barDataKey} {...props} /> : undefined}
+                >
+                    {chartData.map((entry, index) => (
+                        <Cell
+                            fill={index === activeIndex ? "#b8d9ce" : "#6FECCE"}
+                            key={`cell-${index}`}
+                        />
+                    ))}
+                </Bar>
+                {/*{watermark}*/}
+            </BarChart>
+        </ResponsiveContainer>
+    )
 }
 
 export default BarChartGraph
