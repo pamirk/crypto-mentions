@@ -10,6 +10,7 @@ import LastUpdatedTime from "./LastUpdatedTime";
 import styles from "../styles/Home.module.css";
 import Last7daysComponent from "./Last7daysComponent";
 import useColumnSearch from "./ColumnSearch";
+import numeral from "numeral";
 
 
 function numberWithCommas(x) {
@@ -36,12 +37,12 @@ function CoinMarketCap() {
                 name: v.name,
                 symbol: v.symbol,
                 slug: v.slug,
-                price: v.quotes[0].price,
+                price: numeral(v.quotes[0].price).format("($ 0.00 a)"),
                 percentChange1h: v.quotes[0].percentChange1h,
                 percentChange24h: v.quotes[0].percentChange24h,
                 percentChange7d: v.quotes[0].percentChange7d,
-                marketCap: v.quotes[0].marketCap,
-                volume24h: v.quotes[0].volume24h,
+                marketCap: numeral(v.quotes[0].marketCap).format("($ 0.00 a)") ,
+                volume24h: numeral(v.quotes[0].volume24h).format("($ 0.00 a)"),
                 circulatingSupply: v.circulatingSupply,
                 maxSupply: v.maxSupply,
             })
@@ -84,8 +85,7 @@ function CoinMarketCap() {
             dataIndex: 'price',
             key: 'price',
             sorter: (a, b) => a.price - b.price,
-            render: text => <>{'$ ' + numberWithCommas(parseFloat(text).toFixed(2))}</>,
-
+            // render: text => <>{'$ ' + numberWithCommas(parseFloat(text).toFixed(2))}</>,
 
         },
         /*{
@@ -116,7 +116,7 @@ function CoinMarketCap() {
             key: 'marketCap',
 
             sorter: (a, b) => a.marketCap - b.marketCap,
-            render: text => <>$ {numberWithCommas(parseFloat(text).toFixed(2))}</>,
+            // render: text => <>$ {numberWithCommas(parseFloat(text).toFixed(2))}</>,
         },
         {
             title: 'Volume(24h)',
@@ -124,7 +124,7 @@ function CoinMarketCap() {
             key: 'volume24h',
 
             sorter: (a, b) => a.volume24h - b.volume24h,
-            render: text => <>$ {numberWithCommas(parseFloat(text).toFixed(2))}</>,
+            // render: text => <>$ {numberWithCommas(parseFloat(text).toFixed(2))}</>,
         },
         {
             title: 'Circulating Supply',
@@ -133,7 +133,7 @@ function CoinMarketCap() {
 
             sorter: (a, b) => a.circulatingSupply - b.circulatingSupply,
             render: (text, record) => <div>
-                $ {numberWithCommas(parseFloat(text).toFixed(2))}
+                {numeral(text).format("($ 0.00 a)")}
                 {record.maxSupply && <Progress size="small"
                                                percent={parseFloat(100 * record.circulatingSupply / record.maxSupply).toFixed(0)}
                 />}

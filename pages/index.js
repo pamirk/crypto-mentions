@@ -7,13 +7,11 @@ import ReferenceCharts from "../components/ReferenceCharts";
 import CoinMarketCap from "../components/CoinmarketCap";
 import RedditTracking from "../components/RedditTracking";
 import GithubTracking from "../components/GithubTracking";
-import PS from "./../components/TokenTerminal/metrics/ps/PS";
-
-/*import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
 const PS = dynamic(() => import('./../components/TokenTerminal/metrics/ps/PS'), {
     ssr: false
-})*/
+})
 
 function Home() {
     return (

@@ -21,19 +21,18 @@ const dropDownText = {
 }
 
 function CommitCounts() {
-    const [tableData, setTableData] = useState(null)
+    const [tableData, setTableData] = useState([])
     const [dropDownValue, setDropDownValue] = useState(dropDownText[1].text)
-    const [coinNames, setCoinNames] = useState([])
-    const [lastUpdated, setLastUpdated] = useState(null)
+    const [lastUpdated, setLastUpdated] = useState('')
 
-    const {data: commitsData, isSuccess, isFetching, isLoading} = useQuery('get_commits', () => {
+    const {data: commitsData, isLoading} = useQuery('get_commits', () => {
         return axios.get("/api/get_github_tracker").then(res => res.data)
     }, {
         refetchOnWindowFocus: false,
         staleTime: 2 * 60 * 1000,
     })
 
-    const formatDataForTable = (symbolNames, lastRow, secondLastRow) => {
+    const formatDataForTable = (lastRow, secondLastRow) => {
         let data = []
         let commits = 0
         let coin = null
@@ -53,8 +52,6 @@ function CommitCounts() {
                 graphData: commitsData.rows.map(v => v.values[value])
             })
         })
-
-
         return data
     }
     useEffect(() => {
@@ -70,8 +67,7 @@ function CommitCounts() {
     }, [commitsData])
 
     function initialDataSetup() {
-        setCoinNames(commitsData.headerValues)
-        setTableData(formatDataForTable(coinNames, commitsData.rows[commitsData.rows.length - 1].values,
+        setTableData(formatDataForTable(commitsData.rows[commitsData.rows.length - 1].values,
             commitsData.rows[commitsData.rows.length - 2].values))
     }
 

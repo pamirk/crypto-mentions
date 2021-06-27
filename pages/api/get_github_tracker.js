@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // const {GoogleSpreadsheet} = require('google-spreadsheet');
 import {GoogleSpreadsheet} from 'google-spreadsheet'
+const _ = require('lodash');
 
 const doc = new GoogleSpreadsheet('1GioPc78i7XM3rdcr1a2P7NWB_0vhrzD75dDXKYK-e6E');
 
@@ -9,9 +10,7 @@ export default async (req, res) => {
     await doc.loadInfo();
     const sheet = doc.sheetsByIndex[0];
     const rows = await sheet.getRows()
-
     res.status(200).json({
-        headerValues: sheet.headerValues,
         rows: formatRows(sheet.headerValues, rows)
     })
 }
