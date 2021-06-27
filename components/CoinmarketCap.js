@@ -37,12 +37,12 @@ function CoinMarketCap() {
                 name: v.name,
                 symbol: v.symbol,
                 slug: v.slug,
-                price: numeral(v.quotes[0].price).format("($ 0.00 a)"),
+                price: v.quotes[0].price,
                 percentChange1h: v.quotes[0].percentChange1h,
                 percentChange24h: v.quotes[0].percentChange24h,
                 percentChange7d: v.quotes[0].percentChange7d,
-                marketCap: numeral(v.quotes[0].marketCap).format("($ 0.00 a)") ,
-                volume24h: numeral(v.quotes[0].volume24h).format("($ 0.00 a)"),
+                marketCap: v.quotes[0].marketCap ,
+                volume24h: v.quotes[0].volume24h,
                 circulatingSupply: v.circulatingSupply,
                 maxSupply: v.maxSupply,
             })
@@ -85,7 +85,7 @@ function CoinMarketCap() {
             dataIndex: 'price',
             key: 'price',
             sorter: (a, b) => a.price - b.price,
-            // render: text => <>{'$ ' + numberWithCommas(parseFloat(text).toFixed(2))}</>,
+            render: (text, record) => <>{numeral(record.price).format("($ 0.00 a)")}</>
 
         },
         /*{
@@ -114,9 +114,8 @@ function CoinMarketCap() {
             title: 'Market Cap',
             dataIndex: 'marketCap',
             key: 'marketCap',
-
             sorter: (a, b) => a.marketCap - b.marketCap,
-            // render: text => <>$ {numberWithCommas(parseFloat(text).toFixed(2))}</>,
+            render: (text, record) => <>{numeral(record.marketCap).format("($ 0.00 a)")}</>,
         },
         {
             title: 'Volume(24h)',
@@ -124,7 +123,7 @@ function CoinMarketCap() {
             key: 'volume24h',
 
             sorter: (a, b) => a.volume24h - b.volume24h,
-            // render: text => <>$ {numberWithCommas(parseFloat(text).toFixed(2))}</>,
+            render: (text, record)  => <>{numeral(record.volume24h).format("($ 0.00 a)")}</>,
         },
         {
             title: 'Circulating Supply',
