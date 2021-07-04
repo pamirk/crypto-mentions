@@ -600,8 +600,9 @@ export const labelPSData = (
     }))
   }
 
-  const sorted = sortBy(result, "ps")
-
+  let sorted = sortBy(result, "ps")
+  sorted  = sorted.filter((i:any) => !(i.project.toLowerCase() === "futureswap"))
+  // console.log(sorted.reverse())
   return sorted.reverse()
 }
 
