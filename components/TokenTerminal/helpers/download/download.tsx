@@ -24,17 +24,24 @@ export function createCSV(
 export const downloadCSVFromJson = (
   filename: string,
   data: any[],
-  percentageShare?: boolean
+  percentageShare?: boolean,
+  customHeader?: string[]
 ) => {
   // convert JSON to CSV
-  const csvHeader = Object.keys(data[0]).map((key) => {
-    if (key === "datetime") return "Date"
-    return (
-      projectKeysMap[key] ||
-      `${capitalize(key)} ${percentageShare ? " (%)" : " ($)"}`
-    )
-  })
 
+  let csvHeader
+
+  if (!customHeader) {
+    csvHeader = Object.keys(data[0]).map((key) => {
+      if (key === "datetime") return "Date"
+      return (
+        projectKeysMap[key] ||
+        `${capitalize(key)} ${percentageShare ? " (%)" : " ($)"}`
+      )
+    })
+  } else {
+    csvHeader = customHeader
+  }
   const defaultKeys = ["name", "project", "twitter_followers"]
 
   const csv = data.map((row) =>

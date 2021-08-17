@@ -66,7 +66,7 @@ const TotalPS = (props: Props) => {
         <ChartContainer
             title="Price to sales (P/S) ratio based on total revenue"
             chartData={chartData}
-            url={window.location.origin + "/terminal/metrics/ps/total"}
+            url={window.location.origin + "/"}
             name={`total_ps-${selectedLength}`}
             chartKeys={["project", "ps"]}
             tooltipId="chart-ps"

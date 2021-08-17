@@ -134,8 +134,6 @@ const ChartContainer = (props: Props) => {
     }
 
     const handleDownload = () => {
-
-        if (!user.paid) return setIsUpgradeModalVisible(true)
         let selectedKeys = [...chartKeys]
         if (Object.keys(chartData[0]).includes("datetime")) {
             selectedKeys = ["datetime", ...chartKeys]
