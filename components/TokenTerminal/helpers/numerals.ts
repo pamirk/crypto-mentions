@@ -62,46 +62,52 @@ export default getEqualLengthDecimals
 
 export const getLabelForPrice = (value?: number | null) => {
   if (!value) return "-"
-  return "$" + numeral(value).format("0.00a")
+  return "$" + getLabelForNumber(value)
 }
 
+export const getLabelForNumber = (value?: number | null) => {
+  if (!value || value === -1) return "-"
+  return numeral(value).format("0.00a")
+}
+
+export const getFullLabelForPrice = (value?: number | null) => {
+  if (!!value) return "$" + numeral(value).format("0,0.00")
+  return "-"
+}
 export const getLabelForPercentage = (value?: number | null, csv?: boolean) => {
   if (!value) return csv ? "" : "-"
   const prefill = value > 0 ? "+" : ""
-  return prefill + numeral(value).multiply(100.0).format("0.00") + "%"
+  return prefill + numeral(value).multiply(100.0).format("0,0.00") + "%"
 }
 
 export const getLabelForX = (value?: number | null) => {
   if (value === null || value === undefined) return "-"
-  return numeral(value).format("0.00") + "x"
+  return numeral(value).format("0,0.00") + "x"
 }
 
 export const getLabelForChart = (value: number | null, label?: string) => {
   if (value === undefined) return "-"
-  if (label === "ps") return numeral(value).format("0a") + "x"
+  if (label === "ps" || label === "pe" || label === "ratio")
+    return numeral(value).format("0.0a") + "x"
   return "$" + numeral(value).format("0.0a")
-}
-
-export const numberWithCommas = (x: string) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
 export const getLabelForTooltip = (value: number | null, label?: string) => {
   if (value === undefined || value === null) return ["-"]
-  if (label === "ps") return [numeral(value).format("0.00") + "x"]
+  if (label === "ps" || label === "pe" || label === "ratio")
+    return [numeral(value).format("0,0.00") + "x"]
 
   const rounded = isNaN(parseFloat(numeral(value).format("0.0a")))
     ? 0
     : numeral(value).format("0.0a")
 
-  return [
-    "$" + numberWithCommas(value > 0 ? value.toFixed(2) : "0"),
-    "≈ $" + rounded,
-  ]
+  return ["$" + numeral(value).format("0,0.00"), "≈ $" + rounded]
 }
+
 export const getChartLabel = (value: number | null, label?: string) => {
   if (value === undefined || value === null) return ["-"]
-  if (label === "ps") return [numeral(value).format("0a") + "x"]
+  if (label === "ps" || label === "pe")
+    return [numeral(value).format("0.0a") + "x"]
 
   const rounded = isNaN(parseFloat(numeral(value).format("0.0a")))
     ? 0
@@ -109,6 +115,7 @@ export const getChartLabel = (value: number | null, label?: string) => {
 
   return ["$" + rounded]
 }
+
 export type ColorStyle = { color: string }
 
 export const getColor = (percentage?: number | null): ColorStyle => {
@@ -134,4 +141,12 @@ export const getPercentageStrColor = (value: string) => {
 export const getLabelForMasterCSV = (value?: number | null) => {
   if (value === undefined || value === null) return undefined
   return numeral(value).format("0.00")
+}
+
+export const reverseNumeral = (value?: number | null) => {
+  if (!!value) {
+    return value * -1
+  }
+
+  return 0
 }

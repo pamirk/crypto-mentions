@@ -117,6 +117,7 @@ export const ButtonBar = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  max-width: 800px;
 
   @media (max-width: 720px) {
     padding-bottom: 8px;
@@ -255,8 +256,12 @@ export const getGMVText = (tags: string) => {
     return "Transaction vol."
 }
 
-export const ChartContents = styled.div`
+export const ChartContents = styled.div<{ hasArrowButtons?: boolean }>`
   padding: 16px px;
+/*
+  margin: ${(props) => (props.hasArrowButtons ? "0px 40px 0px 60px" : "0px")};
+*/
+
   @media (max-width: 720px) {
     padding: 16px;
   }
@@ -427,32 +432,102 @@ export const ChartLengthSection = ({
     </RightAlignedButtons>
 )
 
-type ChartTypeToggleProps = {
+type CumulativeToggleProps = {
     chartMode: string
     onChange: (val: string) => void
 }
-export const ChartTypeToggle = (props: ChartTypeToggleProps) => {
-    const {chartMode, onChange} = props
+export const CumulativeToggle = (props: CumulativeToggleProps) => {
+  const { chartMode, onChange } = props
 
-    const handleChange = () => {
-        const newMode = chartMode === "historical" ? "cumulative" : "historical"
-        onChange(newMode)
-    }
-    return (
-        <div
-            style={{display: "inline-flex", alignItems: "center", textAlign: "end"}}
-            title="Toggle chart type"
-        >
+  const handleChange = () => {
+    const newMode = chartMode === "historical" ? "cumulative" : "historical"
+    onChange(newMode)
+  }
+  return (
+    <div
+      style={{ display: "inline-flex", alignItems: "center", textAlign: "end" }}
+      title="Toggle chart type"
+    >
       <span
-          style={{
-              marginRight: "10px",
-              fontFamily: "FKGrotesk-SemiMono",
-              fontSize: "12px",
-          }}
+        style={{
+          marginRight: "10px",
+          fontFamily: "FKGrotesk-SemiMono",
+          fontSize: "12px",
+        }}
       >
         {"Show as cumulative"}
       </span>
-            <Toggle onClick={handleChange} checked={chartMode === "cumulative"}/>
-        </div>
-    )
+      <Toggle onClick={handleChange} checked={chartMode === "cumulative"} />
+    </div>
+  )
+}
+
+
+export const PercentageToggle = (props: {
+  onChange: (val: boolean) => void
+}) => {
+  const { onChange } = props
+  const [isOn, setIsOn] = useState(false)
+  const handleChange = () => {
+    onChange(!isOn)
+    setIsOn(!isOn)
+  }
+  return (
+    <div
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        textAlign: "end",
+        marginTop: "10px",
+      }}
+      title="Toggle chart type"
+    >
+      <span
+        style={{
+          marginRight: "10px",
+          fontFamily: "FKGrotesk-SemiMono",
+          fontSize: "12px",
+        }}
+      >
+        {"Show as % share"}
+      </span>
+      <Toggle onClick={handleChange} checked={isOn} />
+    </div>
+  )
+}
+
+
+export const ChartToggle = (props: {
+  onChange: (val: any) => void
+  label: string
+}) => {
+  const { onChange, label } = props
+  const [isOn, setIsOn] = useState(false)
+  const handleChange = () => {
+    onChange(!isOn)
+    setIsOn(!isOn)
+  }
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        textAlign: "end",
+        marginTop: "10px",
+      }}
+      title="Toggle chart type"
+    >
+      <span
+        style={{
+          marginRight: "10px",
+          fontFamily: "FKGrotesk-SemiMono",
+          fontSize: "11px",
+        }}
+      >
+        {label}
+      </span>
+      <Toggle onClick={handleChange} checked={isOn} />
+    </div>
+  )
 }

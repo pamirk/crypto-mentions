@@ -82,3 +82,16 @@ export const getChartKeys = (chartData: any[]) => {
     (key) => !keysToNotInclude.includes(key)
   )
 }
+export const toPercent = (decimal: number, fixed = 0) =>
+  `${(decimal * 100).toFixed(fixed)}%`
+
+export const getPercent = (value: number, total: number) => {
+  const ratio = total > 0 ? value / total : 0
+
+  return toPercent(ratio, 2)
+}
+export type KeyOption = {
+  selected: boolean
+  key: string
+  color: { fill: string; stroke: string }
+}

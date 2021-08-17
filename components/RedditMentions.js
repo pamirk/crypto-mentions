@@ -102,7 +102,7 @@ function RedditMentions() {
         }
         if (key === "4") {
             setDropDownValue('1 month Mentions')
-            //    TODO
+            lastMonth()
         }
         if (key === "5") {
             setDropDownValue('Most Mentions')
@@ -117,14 +117,23 @@ function RedditMentions() {
         <Menu.Item key="1">1 hour Mentions</Menu.Item>
         <Menu.Item key="2">24 hours Mentions</Menu.Item>
         <Menu.Item key="3">7 days Mentions</Menu.Item>
-        <Menu.Item key="4" disabled>1 month Mentions</Menu.Item>
+        <Menu.Item key="4">1 month Mentions</Menu.Item>
         <Menu.Item key="5">Most Mentions</Menu.Item>
-        <Menu.Item key="6" disabled>Newly Mentions</Menu.Item>
     </Menu>);
+    const lastMonth = () => {
+        if (!isLoading) {
+            const lastRows = populateRow(mentionsData.rows, 1, 720)
+            const secondLastRows = populateRow(mentionsData.rows, 721, 1440)
+
+            setTableData(formatDataForTable(coinNames, lastRows, secondLastRows))
+        }
+    }
     const lastSevenDaysMentions = () => {
         if (!isLoading) {
             const lastRows = populateRow(mentionsData.rows, 1, 168)
-            setTableData(formatDataForTable(coinNames, lastRows, lastRows))
+            const secondLastRows = populateRow(mentionsData.rows, 169, 336)
+
+            setTableData(formatDataForTable(coinNames, lastRows, secondLastRows))
         }
     }
     const mostMentions = () => {

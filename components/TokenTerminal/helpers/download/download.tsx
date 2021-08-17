@@ -1,4 +1,4 @@
-import { getLabelForMasterCSV } from "../../helpers/numerals"
+import { getLabelForMasterCSV } from "../numerals"
 import { formatPercentage } from "./masterData"
 import { projectKeysMap } from "./utils"
 
@@ -21,11 +21,18 @@ export function createCSV(
   hiddenElement.click()
 }
 
-export const downloadCSVFromJson = (filename: string, data: any[]) => {
+export const downloadCSVFromJson = (
+  filename: string,
+  data: any[],
+  percentageShare?: boolean
+) => {
   // convert JSON to CSV
   const csvHeader = Object.keys(data[0]).map((key) => {
     if (key === "datetime") return "Date"
-    return projectKeysMap[key] || capitalize(key) + " ($)"
+    return (
+      projectKeysMap[key] ||
+      `${capitalize(key)} ${percentageShare ? " (%)" : " ($)"}`
+    )
   })
 
   const defaultKeys = ["name", "project", "twitter_followers"]
@@ -47,6 +54,8 @@ export const downloadCSVFromJson = (filename: string, data: any[]) => {
           fieldName === "volmc_ratio"
         ) {
           return formatPercentage(row[fieldName])
+        } else if (percentageShare) {
+          return row[fieldName]
         }
 
         return getLabelForMasterCSV(row[fieldName])
@@ -83,5 +92,5 @@ export const formatDate = (date: Date) => {
   return [year, month, day].join("-")
 }
 
-const capitalize = (value: string) =>
+export const capitalize = (value: string) =>
   value.replace(/\b\w/g, (l) => l.toUpperCase())

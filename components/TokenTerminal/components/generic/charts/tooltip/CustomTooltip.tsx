@@ -5,8 +5,9 @@ import {sortBy} from "lodash"
 import React, {useEffect, useState} from "react"
 import {TooltipProps} from "recharts"
 import {ProjectType} from "../../../../types/ApiTypes"
-import {getByLabel} from "../ChartUtils"
+import {getByLabel, getPercent} from "../ChartUtils"
 import {Container, Contents, ContentsTitle, Item, Label, Title, Value, Wrapper,} from "./TooltipComponents"
+import { useData } from "../../../../context/DataContext"
 
 const CustomTooltip = ({
   active,
@@ -14,30 +15,15 @@ const CustomTooltip = ({
   label,
   project,
   metric,
-}: TooltipProps<any, any> & { project?: ProjectType; metric?: string }) => {
-  const [width, setWidth] = useState(document.body.clientWidth)
+  isPercentageShareOn,
+}: TooltipProps<any, any> & {
+  project?: ProjectType
+  metric?: string
+  isPercentageShareOn?: boolean
+}) => {
+  const { isMobile } = useData()
 
-  const updateWidth = () => {
-    if (!document.body) return
-
-    if (
-      (width > 720 && document.body.clientWidth <= 720) ||
-      (width <= 720 && document.body.clientWidth > 720)
-    ) {
-      setWidth(document.body.clientWidth)
-    }
-  }
-
-  // event listener for page resize
-  useEffect(() => {
-    window.addEventListener("resize", updateWidth)
-
-    return () => {
-      window.removeEventListener("resize", updateWidth)
-    }
-  })
-
-  // if (isMobile) return null
+  if (isMobile) return null
 
   const sortedPayload =
     metric === "ps"
@@ -46,6 +32,10 @@ const CustomTooltip = ({
   const wrapData = sortedPayload.length > 3
 
   const title = payload && payload[0] ? payload[0].payload.tooltipLabel : label
+
+  const total = isPercentageShareOn
+    ? sortedPayload.reduce((result, entry) => result + entry.value, 0)
+    : 0
 
   if (active) {
     return (
@@ -62,6 +52,11 @@ const CustomTooltip = ({
                   <Square fill={entry.stroke || entry.fill} size="10" />
                   <Label>{getByLabel(entry.name, project)}</Label>
                 </ContentsTitle>
+                {isPercentageShareOn && (
+                  <Value key="percentage">
+                    {getPercent(entry.value, total)}
+                  </Value>
+                )}
                 {getLabelForTooltip(entry.value, metric || entry.name).map(
                   (str) => (
                     <Value key={str}>{str}</Value>

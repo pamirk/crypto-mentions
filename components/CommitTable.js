@@ -43,7 +43,7 @@ function CommitTable({loading, data}) {
             render: text => <>{text} commits</>,
         },
         {
-            title: 'Past 3 months activity',
+            title: 'Past Days activity',
             dataIndex: 'graphData',
             key: 'graphData',
             render: (text, record) => <GitTinyLine data={record.graphData}/>,
